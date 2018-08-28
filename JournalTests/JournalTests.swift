@@ -10,9 +10,15 @@ import XCTest
 @testable import Journal
 
 extension Entry {
+<<<<<<< HEAD
     static var dayBeforeYesterday: Entry { return Entry(id: UUID(), createdAt: Date.distantPast, text: "그저께 일기") }
     static var yesterDay: Entry { return Entry(id: UUID(), createdAt: Date(), text: "어제 일기") }
     static var today: Entry { return Entry(id: UUID(), createdAt: Date.distantFuture, text: "오늘 일기") }
+=======
+    static var dayBeforeYesterday: Entry { return Entry(createdAt: Date.distantPast, text: "그저께 일기") }
+    static var yesterDay: Entry { return Entry(createdAt: Date(), text: "어제 일기") }
+    static var today: Entry { return Entry(createdAt: Date.distantFuture, text: "오늘 일기") }
+>>>>>>> 0a422a4121992c4553e804929bc896013caf7581
 }
 
 class JournalTests: XCTestCase {
@@ -20,7 +26,11 @@ class JournalTests: XCTestCase {
     
     func testEditEntryText() {
         // Setup
+<<<<<<< HEAD
         let entry = Entry(id: UUID(), createdAt: Date(), text: "첫 번째 일기")
+=======
+        let entry = Entry(text: "첫 번째 일기")
+>>>>>>> 0a422a4121992c4553e804929bc896013caf7581
         
         // Run
         entry.text = "첫 번째 테스트"
@@ -133,5 +143,22 @@ class JournalTests: XCTestCase {
         // Verify 
         XCTAssertEqual(entries.count, 3)
         XCTAssertEqual(entries, [today, yesterDay, dayBeforeYesterday])
+    }
+    
+    func test_엔트리의_개수를_반환한다() {
+        // Setup
+        let journal = InMemoryEntryRepository()
+        
+        // Verify
+        expect(journal.numberOfEntries).to(equal(0))
+        
+        journal.add(Entry.dayBeforeYesterday)
+        expect(journal.numberOfEntries).to(equal(1))
+        
+        journal.add(Entry.yesterDay)
+        expect(journal.numberOfEntries).to(equal(2))
+        
+        journal.add(Entry.today)
+        expect(journal.numberOfEntries).to(equal(3))
     }
 }

@@ -31,6 +31,7 @@ class InMemoryEntryRepository: EntryRepository {
         self.entries = result
     }
     
+<<<<<<< HEAD:Journal/Sources/Model/EntryRepository.swift
     static var shared: InMemoryEntryRepository = {
         let repository = InMemoryEntryRepository()
         return repository
@@ -39,6 +40,9 @@ class InMemoryEntryRepository: EntryRepository {
     var numberOfEntries: Int { 
         return entries.count
     }
+=======
+    var numberOfEntries: Int { return entries.count }
+>>>>>>> 0a422a4121992c4553e804929bc896013caf7581:Journal/Sources/Model/EntryRepository.swift
     
     func add(_ entry: Entry) {
         entries[entry.id] = entry
@@ -64,4 +68,8 @@ class InMemoryEntryRepository: EntryRepository {
         
         return Array(result) 
     }
+}
+
+extension InMemoryEntryRepository {
+    static let shared: InMemoryEntryRepository = InMemoryEntryRepository()
 }
